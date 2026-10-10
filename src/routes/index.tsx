@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Menu, X, Star, MapPin, Clock, Bike, ShoppingBag, Instagram, MessageCircle } from "lucide-react";
-import { CATALOG_URL, INSTAGRAM_URL, OrderButton, Reveal, GiantWord, Cursor, useReveal } from "@/components/site/primitives";
+import { CATALOG_URL, INSTAGRAM_URL, OrderButton, Reveal, GiantWord, Cursor, useReveal, WHATSAPP_NUMBER } from "@/components/site/primitives";
 import hero from "@/assets/hero-burger.jpg";
 import smash from "@/assets/smash.jpg";
 import brioche from "@/assets/brioche.jpg";
@@ -14,11 +14,11 @@ import classico from "@/assets/classico.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Inaciu's Burgerbar | Hamburgueria artesanal em Pato Branco – PR" },
-      { name: "description", content: "Burger artesanal e smash em Pato Branco. Pão brioche, blends de 150g e combinações da casa. Delivery e retirada — peça agora." },
-      { name: "keywords", content: "hamburgueria em Pato Branco, burger artesanal em Pato Branco, delivery de hambúrguer Pato Branco, smash burger" },
+      { title: "Inaciu's Burgerbar | Hamburgueria artesanal em Francisco Beltrão – PR" },
+      { name: "description", content: "Burger artesanal e smash em Francisco Beltrão. Pão brioche, blends de 150g e combinações da casa. Delivery, retirada e refeição no local." },
+      { name: "keywords", content: "hamburgueria em Francisco Beltrão, burger artesanal em Francisco Beltrão, delivery de hambúrguer Francisco Beltrão, smash burger" },
       { property: "og:title", content: "Inaciu's Burgerbar — Não é só um burger." },
-      { property: "og:description", content: "Hamburgueria artesanal em Pato Branco – PR. Delivery e retirada." },
+      { property: "og:description", content: "Hamburgueria artesanal em Francisco Beltrão – PR. Delivery e retirada." },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "pt_BR" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -31,7 +31,8 @@ export const Route = createFileRoute("/")({
           "@type": "Restaurant",
           name: "Inaciu's Burgerbar",
           servesCuisine: "Hambúrguer artesanal",
-          address: { "@type": "PostalAddress", addressLocality: "Pato Branco", addressRegion: "PR", addressCountry: "BR" },
+          address: { "@type": "PostalAddress", streetAddress: "Av. Julio Assis Cavalheiro", addressLocality: "Francisco Beltrão", postalCode: "85601-274", addressRegion: "PR", addressCountry: "BR" },
+          telephone: "+55 46 98804-8989",
           url: "https://inaciusburger.com.br",
           hasMenu: CATALOG_URL,
           sameAs: [INSTAGRAM_URL],
@@ -122,7 +123,7 @@ function Hero() {
       <div aria-hidden className="pointer-events-none absolute right-[30%] top-[25%] size-64 rounded-full bg-cream/10 blur-3xl animate-smoke" />
       <div className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-14 pt-32 md:px-8 md:pb-24">
         <p className="animate-rise mb-6 text-[11px] font-bold uppercase tracking-[0.35em] text-cheddar" style={{ animationDelay: "300ms" }}>
-          Burger artesanal · Pato Branco – PR
+          Burger artesanal · Francisco Beltrão – PR
         </p>
         <h1 className="font-display text-[22vw] md:text-[10.5rem]">
           <span className="animate-rise block" style={{ animationDelay: "400ms" }}>Não é só</span>
@@ -134,7 +135,7 @@ function Hero() {
         <ul className="animate-rise mt-6 flex flex-wrap gap-x-6 gap-y-2 text-xs font-semibold uppercase tracking-widest text-foreground/70" style={{ animationDelay: "800ms" }}>
           <li className="flex items-center gap-1.5"><Star className="size-3.5 fill-cheddar text-cheddar" /> 5.0 em avaliações</li>
           <li>Retirada rápida</li>
-          <li>Delivery em Pato Branco</li>
+          <li>Delivery em Francisco Beltrão</li>
         </ul>
         <div className="animate-rise mt-9 flex flex-wrap gap-3" style={{ animationDelay: "950ms" }}>
           <OrderButton />
@@ -286,17 +287,20 @@ function Social() {
           <span className="font-display text-[9rem] leading-none text-cheddar md:text-[12rem]">5.0</span>
           <div className="pb-6">
             <div className="flex gap-1">{Array.from({ length: 5 }).map((_, i) => <Star key={i} className="size-5 fill-cheddar text-cheddar" />)}</div>
-            <p className="mt-2 text-xs uppercase tracking-widest text-muted-foreground">Nota de avaliação</p>
+            <p className="mt-2 text-xs uppercase tracking-widest text-muted-foreground">5,0 no Google · 8 avaliações</p>
           </div>
         </Reveal>
       </div>
-      {/* Estrutura pronta para depoimentos reais */}
       <div className="relative mx-auto mt-16 grid max-w-7xl gap-px bg-border px-5 md:grid-cols-3 md:px-8">
-        {[0, 1, 2].map((i) => (
-          <Reveal key={i} delay={i * 90} className="bg-background p-8">
+        {[
+          ["Camila Beraldo de Almeida Fischer", "Melhor hambúrguer da cidade!"],
+          ["Hendrica Vitória Fortes Veiga", "Lugar muito bom, ambiente agradável e comida ótima! Com certeza vale a pena conhecer."],
+          ["Maria Eduarda Toledo Beltrame", "Ambiente agradável, comida boa e atendimento bom."],
+        ].map(([name, quote], i) => (
+          <Reveal key={name} delay={i * 90} className="bg-background p-8">
             <div className="flex gap-1">{Array.from({ length: 5 }).map((_, j) => <Star key={j} className="size-3.5 fill-cheddar text-cheddar" />)}</div>
-            <p className="mt-4 text-lg text-foreground/50 italic">Espaço reservado para um depoimento real de cliente.</p>
-            <p className="mt-6 text-xs font-bold uppercase tracking-widest text-steel">— Nome do cliente</p>
+            <p className="mt-4 text-lg text-foreground/70 italic">“{quote}”</p>
+            <p className="mt-6 text-xs font-bold uppercase tracking-widest text-steel">— {name}</p>
           </Reveal>
         ))}
       </div>
@@ -326,9 +330,9 @@ function Social() {
 
 function Location() {
   const info = [
-    { icon: MapPin, t: "Endereço", d: "Pato Branco – PR · endereço completo a confirmar" },
-    { icon: Clock, t: "Horários", d: "A confirmar com a casa" },
-    { icon: Bike, t: "Delivery", d: "Entregas em Pato Branco pelo catálogo" },
+    { icon: MapPin, t: "Endereço", d: "Av. Julio Assis Cavalheiro · Francisco Beltrão – PR · 85601-274" },
+    { icon: Clock, t: "Horários", d: "Fechado agora · abre às 18:00" },
+    { icon: Bike, t: "Delivery", d: "Entrega, retirada e refeição no local" },
     { icon: ShoppingBag, t: "Retirada", d: "Peça online e retire no balcão" },
   ];
   return (
@@ -349,15 +353,15 @@ function Location() {
           </ul>
           <div className="mt-10 flex flex-wrap gap-3">
             <OrderButton />
-            <a href="#" aria-disabled className="btn-ghost-line px-6 py-4 text-xs" title="Número de WhatsApp a confirmar">
+            <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer" className="btn-ghost-line px-6 py-4 text-xs">
               <MessageCircle className="size-4" /> WhatsApp
             </a>
           </div>
         </div>
         <Reveal className="min-h-[360px] overflow-hidden border border-border" delay={150}>
           <iframe
-            title="Mapa — Inaciu's Burgerbar em Pato Branco"
-            src="https://www.google.com/maps?q=Inacius+Burgerbar+Pato+Branco+PR&output=embed"
+            title="Mapa — Inaciu's Burgerbar em Francisco Beltrão"
+            src="https://www.google.com/maps?q=Av.+Julio+Assis+Cavalheiro,+Francisco+Beltr%C3%A3o,+PR,+85601-274&output=embed"
             className="h-full min-h-[360px] w-full grayscale invert-[0.92] contrast-[0.9]"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
@@ -390,7 +394,7 @@ function Footer() {
     <footer className="border-t border-border bg-ink px-5 py-10 md:px-8">
       <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-4 text-xs uppercase tracking-widest text-steel md:flex-row md:items-center">
         <span className="font-display text-2xl normal-case text-cream">INACIU’S</span>
-        <span>Hamburgueria artesanal · Pato Branco – PR</span>
+        <span>Hamburgueria artesanal · Francisco Beltrão – PR</span>
         <span>© {new Date().getFullYear()} Inaciu’s Burgerbar</span>
       </div>
     </footer>

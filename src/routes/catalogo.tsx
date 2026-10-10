@@ -11,13 +11,13 @@ import classico from "@/assets/classico.jpg";
 import porcoes from "@/assets/porcoes-ia.webp";
 
 export const Route = createFileRoute("/catalogo")({
-  head: () => ({ meta: [{ title: "Cardápio | Inaciu's Burgerbar" }, { name: "description", content: "Peça burgers artesanais e smash da Inaciu's Burgerbar em Pato Branco." }] }),
+  head: () => ({ meta: [{ title: "Cardápio | Inaciu's Burgerbar" }, { name: "description", content: "Peça burgers artesanais e smash da Inaciu's Burgerbar em Francisco Beltrão." }] }),
   component: CatalogPage,
 });
 
-type Category = "Hambúrgueres" | "Smash Burger" | "Porções" | "Saladas" | "Pratos Executivos" | "Bebidas";
+type Category = "Hambúrgueres" | "Smash Burger" | "Porções" | "Saladas" | "Pratos Executivos" | "Bebidas" | "Cervejas" | "Destilados" | "Combos" | "Vinhos" | "Bomboniere";
 type MenuItem = { id: string; category: Category; name: string; description: string; price: number; image?: string; tag?: string };
-type CartItem = MenuItem & { qty: number };
+type CartItem = MenuItem & { qty: number; notes?: string };
 
 const MENU: MenuItem[] = [
   { id: "abacaxi", category: "Hambúrgueres", name: "Inacius Abacaxi", description: "Pão brioche, maionese da casa, burger 150g, queijo prato, bacon em fatias e abacaxi selado.", price: 37.99, image: hero },
@@ -81,9 +81,82 @@ const MENU: MenuItem[] = [
   { id: "redbull", category: "Bebidas", name: "Red Bull", description: "Escolha o sabor.", price: 15 },
   { id: "schweppes", category: "Bebidas", name: "Schweppes Citrus Lata", description: "Bebida gelada.", price: 6 },
   { id: "skol-beats", category: "Bebidas", name: "Skol Beats", description: "Bebida gelada.", price: 12 },
+  { id: "sprite", category: "Bebidas", name: "Sprite Lata", description: "Bebida gelada.", price: 6 },
+  { id: "sprite-zero", category: "Bebidas", name: "Sprite Lata Zero", description: "Bebida gelada.", price: 6 },
+  { id: "keep", category: "Bebidas", name: "Keep Cooler", description: "Bebida gelada.", price: 12 },
+  { id: "amstel-ultra", category: "Cervejas", name: "Amstel Ultra Long", description: "Cerveja long neck.", price: 10 },
+  { id: "original", category: "Cervejas", name: "Antartica Original 600ml", description: "Cerveja 600ml.", price: 14 },
+  { id: "bud-long", category: "Cervejas", name: "Budweiser Long Neck", description: "Cerveja long neck.", price: 9 },
+  { id: "bud-1l", category: "Cervejas", name: "Budweiser 1 Litro", description: "Cerveja 1 litro.", price: 15 },
+  { id: "zero-alcool", category: "Cervejas", name: "Cerveja Zero Álcool", description: "Cerveja sem álcool.", price: 10 },
+  { id: "corona", category: "Cervejas", name: "Corona Long Neck", description: "Cerveja long neck.", price: 10 },
+  { id: "heineken-600", category: "Cervejas", name: "Heineken 600ml", description: "Cerveja 600ml.", price: 15 },
+  { id: "heineken-long", category: "Cervejas", name: "Heineken Long Neck", description: "Cerveja long neck.", price: 10 },
+  { id: "milonga", category: "Cervejas", name: "Milonga", description: "Cerveja gelada.", price: 3 },
+  { id: "patagonia-ipa", category: "Cervejas", name: "Patagonia Ipa", description: "Cerveja premium.", price: 12 },
+  { id: "patagonia-weisse", category: "Cervejas", name: "Patagonia Weisse", description: "Cerveja premium.", price: 12 },
+  { id: "stella-gold", category: "Cervejas", name: "Stella Artois Gold", description: "Cerveja premium.", price: 10 },
+  { id: "sol", category: "Cervejas", name: "Sol Long Neck", description: "Cerveja long neck.", price: 10 },
+  { id: "heineken-ultimate", category: "Cervejas", name: "Heineken Ultimate Long Neck", description: "Cerveja premium.", price: 12 },
+  { id: "absolut-1l", category: "Destilados", name: "Absolut 1l", description: "Garrafa de 1 litro.", price: 180 },
+  { id: "buchanans-12", category: "Destilados", name: "Buchanans 12 Anos Litro", description: "Whisky 1 litro.", price: 280 },
+  { id: "black-label", category: "Destilados", name: "Black Label Litro", description: "Whisky 1 litro.", price: 250 },
+  { id: "buchanans-18-700", category: "Destilados", name: "Buchanans 18 Anos 700ml", description: "Whisky 700ml.", price: 800 },
+  { id: "campari", category: "Destilados", name: "Campari", description: "Bebida destilada.", price: 80 },
+  { id: "chivas-18-750", category: "Destilados", name: "Chivas 18 Anos 750ml", description: "Whisky 750ml.", price: 800 },
+  { id: "chivas-xv", category: "Destilados", name: "Chivas Xv Litro", description: "Whisky 1 litro.", price: 450 },
+  { id: "chivas-12", category: "Destilados", name: "Chivas 12 Anos Litro", description: "Whisky 1 litro.", price: 250 },
+  { id: "ciroc", category: "Destilados", name: "Ciroc Tradicional 750ml", description: "Vodka 750ml.", price: 250 },
+  { id: "chivas-18-1l", category: "Destilados", name: "Chivas 18 Anos Litro", description: "Whisky 1 litro.", price: 900 },
+  { id: "ciroc-coconut", category: "Destilados", name: "Ciroc Coconut", description: "Vodka saborizada.", price: 250 },
+  { id: "gold-750", category: "Destilados", name: "Gold Label 750 Ml", description: "Whisky 750ml.", price: 380 },
+  { id: "gold-1l", category: "Destilados", name: "Gold Label Litro", description: "Whisky 1 litro.", price: 480 },
+  { id: "jack-fire", category: "Destilados", name: "Jack Daniel Fire", description: "Whisky saborizado.", price: 230 },
+  { id: "jack-honey", category: "Destilados", name: "Jack Daniel Honey", description: "Whisky saborizado.", price: 230 },
+  { id: "jack-3l", category: "Destilados", name: "Jack Daniel's 3l", description: "Whisky 3 litros.", price: 1200 },
+  { id: "jack-apple", category: "Destilados", name: "Jack Daniels Apple", description: "Whisky saborizado.", price: 230 },
+  { id: "jack-gentleman", category: "Destilados", name: "Jack Daniel's Gentleman", description: "Whisky premium.", price: 320 },
+  { id: "jack-1l", category: "Destilados", name: "Jack Daniels Litro", description: "Whisky 1 litro.", price: 230 },
+  { id: "jack-single", category: "Destilados", name: "Jack Single", description: "Whisky premium.", price: 650 },
+  { id: "jura", category: "Destilados", name: "Jura 16 700ml", description: "Whisky 700ml.", price: 850 },
+  { id: "licor43", category: "Destilados", name: "Licor 43 700ml", description: "Licor 700ml.", price: 200 },
+  { id: "smirnoff-1l", category: "Destilados", name: "Smirnoff 1l", description: "Vodka 1 litro.", price: 100 },
+  { id: "swing", category: "Destilados", name: "Swing 700ml", description: "Whisky 700ml.", price: 500 },
+  { id: "cuervo", category: "Destilados", name: "Tequila Jose Cuervo", description: "Tequila.", price: 200 },
+  { id: "cuervo-silver", category: "Destilados", name: "Tequila Jose Cuervo Silver", description: "Tequila.", price: 200 },
+  { id: "grey-goose", category: "Destilados", name: "Vodka Grey Goose 750ml", description: "Vodka 750ml.", price: 250 },
+  { id: "combo-absolut", category: "Combos", name: "Combo Absolut 1l", description: "4 Redbull + gelo.", price: 220 },
+  { id: "combo-black", category: "Combos", name: "Combo Black Label", description: "4 Redbull + gelo.", price: 290 },
+  { id: "combo-buchanans", category: "Combos", name: "Combo Buchanans 12 Anos", description: "4 Redbull + gelo.", price: 290 },
+  { id: "combo-chivas", category: "Combos", name: "Combo Chivas 12 Anos", description: "4 Redbull + gelo.", price: 290 },
+  { id: "combo-ciroc-coconut", category: "Combos", name: "Combo Ciroc Coconut 750ml", description: "4 Redbull + gelo.", price: 300 },
+  { id: "combo-ciroc", category: "Combos", name: "Combo Ciroc Tradicional 750ml", description: "4 Redbull + gelo.", price: 300 },
+  { id: "combo-smirnoff", category: "Combos", name: "Combo De Smirnoff", description: "4 Redbull + gelo.", price: 150 },
+  { id: "combo-bombay", category: "Combos", name: "Combo Gin Bombay", description: "4 Redbull + gelo.", price: 260 },
+  { id: "combo-jack", category: "Combos", name: "Combo Jack Daniels", description: "Combo da casa.", price: 280 },
+  { id: "combo-bulldog", category: "Combos", name: "Combo Gin Bulldog 1l", description: "4 Redbull + gelo.", price: 290 },
+  { id: "combo-grey", category: "Combos", name: "Combo Grey Goose 750ml", description: "4 Redbull + gelo.", price: 300 },
+  { id: "combo-stoli", category: "Combos", name: "Combo Stolichnaya Elit 750ml", description: "4 Redbull + gelo.", price: 550 },
+  { id: "combo-belvedere", category: "Combos", name: "Combo Vodka Belvedere 700ml", description: "4 Redbull + gelo.", price: 550 },
+  { id: "alma-negra", category: "Vinhos", name: "Vinho Alma Negra 750ml", description: "Vinho 750ml.", price: 159 },
+  { id: "malbec", category: "Vinhos", name: "Vinho Malbec Reservado", description: "Vinho reservado.", price: 49.9 },
+  { id: "enemigo", category: "Vinhos", name: "El Enemigo Chardonnay", description: "Vinho Chardonnay.", price: 179.9 },
+  { id: "cabernet", category: "Vinhos", name: "Vinho Cabernet Sauvignon Reservado", description: "Vinho reservado.", price: 49.9 },
+  { id: "la-linda", category: "Vinhos", name: "Vinho La Linda", description: "Vinho da casa.", price: 85 },
+  { id: "intocables", category: "Vinhos", name: "Vinho Los Intocables", description: "Vinho da casa.", price: 90 },
+  { id: "kitkat", category: "Bomboniere", name: "Kit Kat", description: "Chocolate.", price: 6 },
+  { id: "fini", category: "Bomboniere", name: "Fini Tubes Tutti Frutti", description: "Doce.", price: 3 },
+  { id: "halls", category: "Bomboniere", name: "Halls", description: "Doce.", price: 3 },
+  { id: "mentos", category: "Bomboniere", name: "Mentos/Trident Goma De Mascar", description: "Doce.", price: 4 },
+  { id: "hersheys", category: "Bomboniere", name: "Hershey's Extra Cremoso 82g", description: "Chocolate.", price: 10 },
+  { id: "kinder", category: "Bomboniere", name: "Kinder Bueno White", description: "Chocolate.", price: 12 },
+  { id: "oreo", category: "Bomboniere", name: "Mini Oreo", description: "Biscoito.", price: 5 },
+  { id: "pacoca", category: "Bomboniere", name: "Paçoca Amor Sing's", description: "Doce.", price: 1 },
+  { id: "prestigio", category: "Bomboniere", name: "Prestigio", description: "Chocolate.", price: 4 },
+  { id: "snickers", category: "Bomboniere", name: "Snickers", description: "Chocolate.", price: 7 },
 ];
 
-const CATEGORIES: Array<Category | "Todos"> = ["Todos", "Hambúrgueres", "Smash Burger", "Porções", "Saladas", "Pratos Executivos", "Bebidas"];
+const CATEGORIES: Array<Category | "Todos"> = ["Todos", "Hambúrgueres", "Smash Burger", "Porções", "Saladas", "Pratos Executivos", "Bebidas", "Cervejas", "Destilados", "Combos", "Vinhos", "Bomboniere"];
 
 const money = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
 
@@ -103,17 +176,18 @@ function CatalogPage() {
   const add = (item: MenuItem) => {
     setCart((old) => {
       const found = old.find((x) => x.id === item.id);
-      return found ? old.map((x) => x.id === item.id ? { ...x, qty: x.qty + 1 } : x) : [...old, { ...item, qty: 1 }];
+      return found ? old.map((x) => x.id === item.id ? { ...x, qty: x.qty + 1 } : x) : [...old, { ...item, qty: 1, notes: "" }];
     });
     setOpen(true);
   };
   const change = (id: string, by: number) => setCart((old) => old.flatMap((x) => x.id !== id ? [x] : x.qty + by > 0 ? [{ ...x, qty: x.qty + by }] : []));
+  const setNotes = (id: string, notes: string) => setCart((old) => old.map((item) => item.id === id ? { ...item, notes } : item));
   const count = cart.reduce((sum, item) => sum + item.qty, 0);
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
   const items = category === "Todos" ? MENU : MENU.filter((item) => item.category === category);
   const finalize = () => {
     if (!cart.length || !form.name || !form.phone || (orderType === "delivery" && (!form.address || !form.number || !form.district))) return;
-    const list = cart.map((item) => `• ${item.qty}x ${item.name} — ${money.format(item.price * item.qty)}`).join("%0A");
+    const list = cart.map((item) => `• ${item.qty}x ${item.name} — ${money.format(item.price * item.qty)}${item.notes?.trim() ? `%0A  Obs.: ${item.notes.trim()}` : ""}`).join("%0A");
     const destination = orderType === "delivery" ? `Entrega: ${form.address}, ${form.number} — ${form.district}${form.complement ? ` (${form.complement})` : ""}` : "Retirada no balcão";
     const message = `Olá, Inaciu's! Quero fazer um pedido:%0A%0A${list}%0A%0ASubtotal: ${money.format(subtotal)}%0A${destination}%0ANome: ${form.name}%0ATelefone: ${form.phone}%0APagamento: ${form.payment}%0A%0APode me confirmar a taxa e o total?`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, "_blank", "noopener,noreferrer");
@@ -133,7 +207,7 @@ function CatalogPage() {
         <img src={hero} alt="Burger artesanal Inaciu's" className="absolute inset-0 h-full w-full object-cover opacity-35" />
         <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/90 to-ink/25" />
         <div className="relative mx-auto max-w-7xl px-5 py-20 md:px-8 md:py-28">
-          <p className="mb-5 text-[11px] font-bold uppercase tracking-[.35em] text-cheddar">Pedido online · Pato Branco</p>
+          <p className="mb-5 text-[11px] font-bold uppercase tracking-[.35em] text-cheddar">Pedido online · Francisco Beltrão</p>
           <h1 className="font-display text-[5.7rem] leading-[.78] sm:text-[8rem] md:text-[11rem]">A sua<br /><span className="text-cheddar">mordida.</span></h1>
           <p className="mt-7 max-w-md text-foreground/75">Monte seu pedido, informe entrega ou retirada e envie direto para a casa. Simples, rápido e sem perder a fome.</p>
         </div>
@@ -153,7 +227,7 @@ function CatalogPage() {
             {item.tag && <span className="absolute left-4 top-4 bg-cheddar px-3 py-2 text-[10px] font-extrabold uppercase tracking-widest text-ink">{item.tag}</span>}
             <button onClick={() => add(item)} className="absolute bottom-4 right-4 grid size-12 place-items-center bg-cream text-ink shadow-xl transition-transform hover:scale-105" aria-label={`Adicionar ${item.name}`}><Plus className="size-5" /></button>
           </div>
-          <div className="mt-5 flex items-start justify-between gap-4"><div><p className="text-[10px] font-bold uppercase tracking-[.22em] text-steel">{item.category}</p><h3 className="mt-1 font-display text-3xl">{item.name}</h3><p className="mt-2 max-w-xs text-sm leading-relaxed text-muted-foreground">{item.description}</p></div><p className="shrink-0 font-display text-2xl text-cheddar">{money.format(item.price)}</p></div>
+          <div className="mt-5 flex items-start justify-between gap-4"><div><p className="text-[10px] font-bold uppercase tracking-[.22em] text-steel">{item.category}</p><h3 className="mt-1 font-display text-2xl leading-[.9] md:text-[1.7rem]">{item.name}</h3><p className="mt-2 max-w-xs text-sm leading-relaxed text-muted-foreground">{item.description}</p></div><p className="shrink-0 font-display text-xl text-cheddar">{money.format(item.price)}</p></div>
         </article>)}</div>
       </section>
 
@@ -163,7 +237,7 @@ function CatalogPage() {
         <button className="absolute inset-0 bg-black/70 backdrop-blur-sm" aria-label="Fechar sacola" onClick={() => setOpen(false)} />
         <div className="relative flex h-full w-full max-w-xl flex-col bg-ink shadow-2xl">
           <div className="flex items-center justify-between border-b border-border px-6 py-5"><div><p className="text-[10px] font-bold uppercase tracking-[.3em] text-cheddar">Seu pedido</p><h2 className="mt-1 font-display text-4xl">A sacola.</h2></div><button onClick={() => setOpen(false)} className="grid size-11 place-items-center border border-border"><X /></button></div>
-          {!checkout ? <><div className="flex-1 overflow-y-auto px-6 py-4">{cart.length ? cart.map((item) => <div key={item.id} className="flex gap-4 border-b border-border py-5"><div className="grid size-16 shrink-0 place-items-center bg-card">{item.image ? <img src={item.image} alt="" className="size-full object-cover" /> : <CirclePlus className="text-cheddar" />}</div><div className="min-w-0 flex-1"><h3 className="font-display text-2xl">{item.name}</h3><p className="mt-1 text-sm text-muted-foreground">{money.format(item.price)}</p><div className="mt-3 flex items-center gap-3"><button className="grid size-8 place-items-center border border-border" onClick={() => change(item.id, -1)} aria-label={`Diminuir ${item.name}`}><Minus className="size-3" /></button><span className="min-w-4 text-center text-sm font-bold">{item.qty}</span><button className="grid size-8 place-items-center border border-border" onClick={() => change(item.id, 1)} aria-label={`Aumentar ${item.name}`}><Plus className="size-3" /></button><button className="ml-auto text-steel hover:text-ketchup" onClick={() => change(item.id, -item.qty)} aria-label={`Remover ${item.name}`}><Trash2 className="size-4" /></button></div></div><p className="font-display text-xl text-cheddar">{money.format(item.price * item.qty)}</p></div>) : <div className="grid h-full min-h-72 place-items-center text-center"><div><ShoppingBag className="mx-auto size-8 text-cheddar" /><p className="mt-4 font-display text-3xl">Sua sacola está vazia.</p><p className="mt-2 text-sm text-muted-foreground">Escolha algo que vale a mordida.</p></div></div>}</div><div className="border-t border-border p-6"><div className="mb-5 flex justify-between font-display text-3xl"><span>Subtotal</span><span className="text-cheddar">{money.format(subtotal)}</span></div><button disabled={!cart.length} onClick={() => setCheckout(true)} className="btn-order w-full justify-center px-6 py-5 text-xs disabled:cursor-not-allowed disabled:opacity-40"><span>Continuar pedido</span><ArrowRight className="size-4" /></button></div></> : <div className="flex-1 overflow-y-auto px-6 py-6"><button className="mb-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-steel hover:text-cream" onClick={() => setCheckout(false)}><ArrowLeft className="size-4" /> Voltar à sacola</button><h3 className="font-display text-4xl">Entrega ou<br /><span className="text-cheddar">retirada?</span></h3><div className="mt-6 grid grid-cols-2 gap-3">{([['delivery','Entrega'],['retirada','Retirada']] as const).map(([key,label]) => <button key={key} onClick={() => setOrderType(key)} className={`border p-4 text-left ${orderType === key ? "border-cheddar bg-cheddar/10" : "border-border"}`}><Check className={`mb-5 size-4 ${orderType === key ? "text-cheddar" : "opacity-0"}`} /><span className="block font-display text-2xl">{label}</span><span className="mt-1 block text-xs text-muted-foreground">{key === 'delivery' ? 'Informe o seu endereço' : 'Retire na casa'}</span></button>)}</div><div className="mt-8 grid gap-4"><Field label="Seu nome" value={form.name} onChange={(v) => setForm({ ...form, name: v })} placeholder="Como podemos te chamar?" /><Field label="WhatsApp" value={form.phone} onChange={(v) => setForm({ ...form, phone: v })} placeholder="(46) 99999-9999" inputMode="tel" />{orderType === 'delivery' && <><Field label="Rua / Avenida" value={form.address} onChange={(v) => setForm({ ...form, address: v })} placeholder="Ex.: Av. Tupi" /><div className="grid grid-cols-[.7fr_1.3fr] gap-3"><Field label="Número" value={form.number} onChange={(v) => setForm({ ...form, number: v })} placeholder="123" /><Field label="Bairro" value={form.district} onChange={(v) => setForm({ ...form, district: v })} placeholder="Centro" /></div><Field label="Complemento (opcional)" value={form.complement} onChange={(v) => setForm({ ...form, complement: v })} placeholder="Apartamento, bloco, referência..." /></>}<label className="block"><span className="mb-2 block text-[10px] font-bold uppercase tracking-[.25em] text-steel">Pagamento</span><div className="relative"><select value={form.payment} onChange={(e) => setForm({ ...form, payment: e.target.value })} className="w-full appearance-none border border-border bg-card px-4 py-4 text-sm outline-none focus:border-cheddar"><option>Pix</option><option>Cartão na entrega</option><option>Dinheiro</option></select><ChevronDown className="pointer-events-none absolute right-4 top-1/2 size-4 -translate-y-1/2" /></div></label></div><div className="mt-8 border-t border-border pt-6"><div className="flex justify-between text-sm text-muted-foreground"><span>Subtotal</span><span>{money.format(subtotal)}</span></div><p className="mt-2 text-xs text-steel">A taxa de entrega e o total final serão confirmados pela casa.</p><button onClick={finalize} className="btn-order mt-5 w-full justify-center px-6 py-5 text-xs"><span>Enviar pedido no WhatsApp</span><ArrowRight className="size-4" /></button></div></div>}</div>
+          {!checkout ? <><div className="flex-1 overflow-y-auto px-6 py-4">{cart.length ? cart.map((item) => <div key={item.id} className="flex gap-4 border-b border-border py-5"><div className="grid size-16 shrink-0 place-items-center bg-card">{item.image ? <img src={item.image} alt="" className="size-full object-cover" /> : <CirclePlus className="text-cheddar" />}</div><div className="min-w-0 flex-1"><h3 className="font-display text-xl leading-none">{item.name}</h3><p className="mt-1 text-sm text-muted-foreground">{money.format(item.price)}</p><div className="mt-3 flex items-center gap-3"><button className="grid size-8 place-items-center border border-border" onClick={() => change(item.id, -1)} aria-label={`Diminuir ${item.name}`}><Minus className="size-3" /></button><span className="min-w-4 text-center text-sm font-bold">{item.qty}</span><button className="grid size-8 place-items-center border border-border" onClick={() => change(item.id, 1)} aria-label={`Aumentar ${item.name}`}><Plus className="size-3" /></button><button className="ml-auto text-steel hover:text-ketchup" onClick={() => change(item.id, -item.qty)} aria-label={`Remover ${item.name}`}><Trash2 className="size-4" /></button></div><label className="mt-4 block"><span className="mb-2 block text-[10px] font-bold uppercase tracking-[.2em] text-steel">Observações deste item</span><textarea value={item.notes || ""} onChange={(event) => setNotes(item.id, event.target.value)} placeholder="Ex.: sem cebola, tirar picles..." rows={2} className="w-full resize-none border border-border bg-card px-3 py-2 text-xs outline-none placeholder:text-steel focus:border-cheddar" /></label></div><p className="font-display text-lg text-cheddar">{money.format(item.price * item.qty)}</p></div>) : <div className="grid h-full min-h-72 place-items-center text-center"><div><ShoppingBag className="mx-auto size-8 text-cheddar" /><p className="mt-4 font-display text-3xl">Sua sacola está vazia.</p><p className="mt-2 text-sm text-muted-foreground">Escolha algo que vale a mordida.</p></div></div>}</div><div className="border-t border-border p-6"><div className="mb-5 flex justify-between font-display text-3xl"><span>Subtotal</span><span className="text-cheddar">{money.format(subtotal)}</span></div><button disabled={!cart.length} onClick={() => setCheckout(true)} className="btn-order w-full justify-center px-6 py-5 text-xs disabled:cursor-not-allowed disabled:opacity-40"><span>Continuar pedido</span><ArrowRight className="size-4" /></button></div></> : <div className="flex-1 overflow-y-auto px-6 py-6"><button className="mb-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-steel hover:text-cream" onClick={() => setCheckout(false)}><ArrowLeft className="size-4" /> Voltar à sacola</button><h3 className="font-display text-4xl">Entrega ou<br /><span className="text-cheddar">retirada?</span></h3><div className="mt-6 grid grid-cols-2 gap-3">{([['delivery','Entrega'],['retirada','Retirada']] as const).map(([key,label]) => <button key={key} onClick={() => setOrderType(key)} className={`border p-4 text-left ${orderType === key ? "border-cheddar bg-cheddar/10" : "border-border"}`}><Check className={`mb-5 size-4 ${orderType === key ? "text-cheddar" : "opacity-0"}`} /><span className="block font-display text-2xl">{label}</span><span className="mt-1 block text-xs text-muted-foreground">{key === 'delivery' ? 'Informe o seu endereço' : 'Retire na casa'}</span></button>)}</div><div className="mt-8 grid gap-4"><Field label="Seu nome" value={form.name} onChange={(v) => setForm({ ...form, name: v })} placeholder="Como podemos te chamar?" /><Field label="WhatsApp" value={form.phone} onChange={(v) => setForm({ ...form, phone: v })} placeholder="(46) 99999-9999" inputMode="tel" />{orderType === 'delivery' && <><Field label="Rua / Avenida" value={form.address} onChange={(v) => setForm({ ...form, address: v })} placeholder="Ex.: Av. Tupi" /><div className="grid grid-cols-[.7fr_1.3fr] gap-3"><Field label="Número" value={form.number} onChange={(v) => setForm({ ...form, number: v })} placeholder="123" /><Field label="Bairro" value={form.district} onChange={(v) => setForm({ ...form, district: v })} placeholder="Centro" /></div><Field label="Complemento (opcional)" value={form.complement} onChange={(v) => setForm({ ...form, complement: v })} placeholder="Apartamento, bloco, referência..." /></>}<label className="block"><span className="mb-2 block text-[10px] font-bold uppercase tracking-[.25em] text-steel">Pagamento</span><div className="relative"><select value={form.payment} onChange={(e) => setForm({ ...form, payment: e.target.value })} className="w-full appearance-none border border-border bg-card px-4 py-4 text-sm outline-none focus:border-cheddar"><option>Pix</option><option>Cartão na entrega</option><option>Dinheiro</option></select><ChevronDown className="pointer-events-none absolute right-4 top-1/2 size-4 -translate-y-1/2" /></div></label></div><div className="mt-8 border-t border-border pt-6"><div className="flex justify-between text-sm text-muted-foreground"><span>Subtotal</span><span>{money.format(subtotal)}</span></div><p className="mt-2 text-xs text-steel">A taxa de entrega e o total final serão confirmados pela casa.</p><button onClick={finalize} className="btn-order mt-5 w-full justify-center px-6 py-5 text-xs"><span>Enviar pedido no WhatsApp</span><ArrowRight className="size-4" /></button></div></div>}</div>
       </aside>}
     </main>
   );

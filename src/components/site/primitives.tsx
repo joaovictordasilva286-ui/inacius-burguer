@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 
 export const CATALOG_URL = "https://inaciusburgerbar.sischef.shop/catalogo";
 export const INSTAGRAM_URL = "https://www.instagram.com/inaciusburgerbar/";
-export const WHATSAPP_NUMBER = "5546991245006";
+export const WHATSAPP_NUMBER = "5546988048989";
 
 /** Adds `.in` once the element enters the viewport. */
 export function useReveal<T extends HTMLElement>() {

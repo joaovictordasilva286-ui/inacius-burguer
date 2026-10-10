@@ -78,8 +78,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Inaciu's Burgerbar — Hamburgueria artesanal em Pato Branco" },
-      { name: "description", content: "Burgers artesanais e smash em Pato Branco – PR." },
+      { title: "Inaciu's Burgerbar — Hamburgueria artesanal em Francisco Beltrão" },
+      { name: "description", content: "Burgers artesanais e smash em Francisco Beltrão – PR." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
