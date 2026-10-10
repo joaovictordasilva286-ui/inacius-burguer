@@ -227,7 +227,7 @@ function CatalogPage() {
             {item.tag && <span className="absolute left-4 top-4 bg-cheddar px-3 py-2 text-[10px] font-extrabold uppercase tracking-widest text-ink">{item.tag}</span>}
             <button onClick={() => add(item)} className="absolute bottom-4 right-4 grid size-12 place-items-center bg-cream text-ink shadow-xl transition-transform hover:scale-105" aria-label={`Adicionar ${item.name}`}><Plus className="size-5" /></button>
           </div>
-          <div className="mt-5 flex items-start justify-between gap-4"><div><p className="text-[10px] font-bold uppercase tracking-[.22em] text-steel">{item.category}</p><h3 className="mt-1 font-display text-2xl leading-[.9] md:text-[1.7rem]">{item.name}</h3><p className="mt-2 max-w-xs text-sm leading-relaxed text-muted-foreground">{item.description}</p></div><p className="shrink-0 font-display text-xl text-cheddar">{money.format(item.price)}</p></div>
+          <div className="mt-5 flex items-start justify-between gap-4"><div><p className="text-[10px] font-bold uppercase tracking-[.22em] text-steel">{item.category}</p><h3 className="mt-2 font-display text-2xl leading-[1.08] md:text-[1.7rem]">{item.name}</h3><p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">{item.description}</p></div><p className="shrink-0 font-display text-xl text-cheddar">{money.format(item.price)}</p></div>
         </article>)}</div>
       </section>
 

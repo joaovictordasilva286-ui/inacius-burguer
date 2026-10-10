@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type ReactNode, type MouseEvent } from "re
 import { ArrowRight } from "lucide-react";
 
 export const CATALOG_URL = "https://inaciusburgerbar.sischef.shop/catalogo";
-export const INSTAGRAM_URL = "https://www.instagram.com/inaciusburgerbar/";
+export const INSTAGRAM_URL = "https://instagram.com/inaciusburgerbar";
 export const WHATSAPP_NUMBER = "5546988048989";
 
 /** Adds `.in` once the element enters the viewport. */
